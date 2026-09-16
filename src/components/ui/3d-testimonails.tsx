@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, useRef } from 'react'
+import { useMemo, useRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
 interface MarqueeProps extends ComponentPropsWithoutRef<'div'> {
@@ -19,7 +19,7 @@ interface MarqueeProps extends ComponentPropsWithoutRef<'div'> {
   /**
    * Content to be displayed in the marquee
    */
-  children: React.ReactNode
+  children: ReactNode
   /**
    * Whether to animate vertically instead of horizontally
    * @default false
@@ -80,7 +80,7 @@ export function Marquee({
       role={ariaRole}
       tabIndex={0}
     >
-      {React.useMemo(
+      {useMemo(
         () => (
           <>
             {Array.from({ length: repeat }, (_, i) => (

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, type RefObject, type MouseEvent } from 'react'
 import welcomeImg from '../assets/welcometohod.png'
 
 interface NavbarProps {
-  logoTargetRef: React.RefObject<HTMLDivElement | null>
+  logoTargetRef: RefObject<HTMLDivElement | null>
 }
 
 export default function Navbar({ logoTargetRef }: NavbarProps) {
@@ -20,7 +20,7 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
     setMobileMenuOpen(false)
     const el = document.getElementById(id)

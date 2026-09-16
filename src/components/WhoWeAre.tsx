@@ -1,4 +1,3 @@
-import React from 'react'
 // Default placeholder using church-2.jpg until the user supplies their custom pastor image
 import pastorPlaceholder from '../assets/heroimg/church-2.jpg'
 

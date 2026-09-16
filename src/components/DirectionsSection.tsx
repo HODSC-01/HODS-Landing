@@ -1,4 +1,3 @@
-import React from 'react'
 import { Car, HeartHandshake, Sparkles, MapPin, Navigation, ExternalLink } from 'lucide-react'
 
 interface DirectionsSectionProps {
