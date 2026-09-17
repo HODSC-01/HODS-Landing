@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import welcomeImg from '../assets/welcometohod.png'
 import church1 from '../assets/heroimg/church-1.jpg'
 import church2 from '../assets/heroimg/church-2.jpg'
@@ -29,6 +31,79 @@ const IMAGES_1 = [church1, church2, church3, church4]
 const IMAGES_2 = [church5, church6, church7, church8]
 
 const IMAGES_3 = [church9, church10, church11, church1]
+
+function MobileGallery() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  })
+
+  const rotateX = useTransform(scrollYProgress, [0, 0.45], [20, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.45], [1.05, 1])
+  const y1 = useTransform(scrollYProgress, [0, 1], ['0%', '-8%'])
+  const y2 = useTransform(scrollYProgress, [0, 1], ['-6%', '5%'])
+  const y3 = useTransform(scrollYProgress, [0, 1], ['0%', '-8%'])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full px-1.5 pt-1 pb-4 border-0 -mt-2 overflow-x-clip"
+      style={{
+        perspective: '1000px',
+        perspectiveOrigin: 'center top',
+      }}
+    >
+      <motion.div
+        className="relative grid grid-cols-3 gap-1.5 w-full border-0"
+        style={{
+          rotateX,
+          scale,
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        {/* Column 1 */}
+        <motion.div className="flex flex-col gap-1.5 border-0" style={{ y: y1 }}>
+          {IMAGES_1.map((imageUrl, index) => (
+            <img
+              key={index}
+              className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0"
+              src={imageUrl}
+              alt="House of DaySpring gallery item"
+              loading="lazy"
+            />
+          ))}
+        </motion.div>
+
+        {/* Column 2 */}
+        <motion.div className="flex flex-col gap-1.5 mt-[-6%] border-0" style={{ y: y2 }}>
+          {IMAGES_2.map((imageUrl, index) => (
+            <img
+              key={index}
+              className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0"
+              src={imageUrl}
+              alt="House of DaySpring gallery item"
+              loading="lazy"
+            />
+          ))}
+        </motion.div>
+
+        {/* Column 3 */}
+        <motion.div className="flex flex-col gap-1.5 border-0" style={{ y: y3 }}>
+          {IMAGES_3.map((imageUrl, index) => (
+            <img
+              key={index}
+              className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0"
+              src={imageUrl}
+              alt="House of DaySpring gallery item"
+              loading="lazy"
+            />
+          ))}
+        </motion.div>
+      </motion.div>
+    </div>
+  )
+}
 
 export default function Home() {
   return (
@@ -75,29 +150,9 @@ export default function Home() {
           </ContainerAnimated>
         </ContainerStagger>
 
-        {/* ── Mobile: Same animated gallery, portrait images to fill viewport ── */}
+        {/* ── Mobile: Animated 3D Gallery in natural flow (No gap) ── */}
         <div className="sm:hidden">
-          <ContainerScroll className="relative min-h-0 h-[105vh] w-full px-1.5 border-0 -mt-4 -mb-10 sm:mb-0">
-            <ContainerSticky className="h-auto w-full border-0 items-start pt-14 pb-0">
-              <GalleryContainer className="w-full h-auto border-0 pt-0 pb-0 gap-1.5">
-                <GalleryCol yRange={['-6%', '2%']} className="mt-0 border-0 gap-1.5">
-                  {IMAGES_1.map((imageUrl, index) => (
-                    <img key={index} className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
-                  ))}
-                </GalleryCol>
-                <GalleryCol className="mt-[-6%] border-0 gap-1.5" yRange={['6%', '1%']}>
-                  {IMAGES_2.map((imageUrl, index) => (
-                    <img key={index} className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
-                  ))}
-                </GalleryCol>
-                <GalleryCol yRange={['-6%', '2%']} className="mt-0 border-0 gap-1.5">
-                  {IMAGES_3.map((imageUrl, index) => (
-                    <img key={index} className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
-                  ))}
-                </GalleryCol>
-              </GalleryContainer>
-            </ContainerSticky>
-          </ContainerScroll>
+          <MobileGallery />
         </div>
 
         {/* ── Desktop: Full 3D Animated Scroll Gallery ── */}
