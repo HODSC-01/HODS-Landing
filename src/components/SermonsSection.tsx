@@ -1,4 +1,3 @@
-
 interface SermonsSectionProps {
   videoId?: string
   youtubeChannelUrl?: string

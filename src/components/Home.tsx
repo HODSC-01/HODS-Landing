@@ -23,6 +23,7 @@ import {
 import { Button } from './ui/button'
 import WhoWeAre from './WhoWeAre'
 import SermonsSection from './SermonsSection'
+import SocialMediaFollow from './SocialMediaFollow'
 import TestimonialsDemo from './TestimonialsDemo'
 import DirectionsSection from './DirectionsSection'
 
@@ -210,6 +211,9 @@ export default function Home() {
 
       {/* ── Catch Up On Our Powerful Sermons (YouTube Section) ── */}
       <SermonsSection />
+
+      {/* ── Follow Us on Social Media (Outside SermonsSection) ── */}
+      <SocialMediaFollow />
 
       {/* ── 3D Testimonials Marquee Section ── */}
       <TestimonialsDemo />
