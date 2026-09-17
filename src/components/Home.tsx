@@ -1,5 +1,5 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { useState } from 'react'
+import { motion } from 'motion/react'
 import welcomeImg from '../assets/welcometohod.png'
 import church1 from '../assets/heroimg/church-1.jpg'
 import church2 from '../assets/heroimg/church-2.jpg'
@@ -27,80 +27,89 @@ import TestimonialsDemo from './TestimonialsDemo'
 import DirectionsSection from './DirectionsSection'
 
 const IMAGES_1 = [church1, church2, church3, church4]
-
 const IMAGES_2 = [church5, church6, church7, church8]
-
 const IMAGES_3 = [church9, church10, church11, church1]
 
-function MobileGallery() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  })
+const MOBILE_HERO_CARDS = [
+  {
+    id: 0,
+    src: church1,
+    alt: 'House of DaySpring welcoming community',
+  },
+  {
+    id: 1,
+    src: church5,
+    alt: 'House of DaySpring worship service',
+  },
+  {
+    id: 2,
+    src: church9,
+    alt: 'House of DaySpring joyful fellowship',
+  },
+]
 
-  const rotateX = useTransform(scrollYProgress, [0, 0.45], [20, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.45], [1.05, 1])
-  const y1 = useTransform(scrollYProgress, [0, 1], ['0%', '-8%'])
-  const y2 = useTransform(scrollYProgress, [0, 1], ['-6%', '5%'])
-  const y3 = useTransform(scrollYProgress, [0, 1], ['0%', '-8%'])
+function MobileHeroCards() {
+  const [activeIdx, setActiveIdx] = useState(1) // Center card initially active
+
+  const getSlot = (idx: number) => {
+    const diff = (idx - activeIdx + 3) % 3
+    if (diff === 0) return 'center'
+    if (diff === 1) return 'right'
+    return 'left'
+  }
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full px-1.5 pt-1 pb-4 border-0 -mt-2 overflow-x-clip"
-      style={{
-        perspective: '1000px',
-        perspectiveOrigin: 'center top',
-      }}
-    >
-      <motion.div
-        className="relative grid grid-cols-3 gap-1.5 w-full border-0"
-        style={{
-          rotateX,
-          scale,
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        {/* Column 1 */}
-        <motion.div className="flex flex-col gap-1.5 border-0" style={{ y: y1 }}>
-          {IMAGES_1.map((imageUrl, index) => (
-            <img
-              key={index}
-              className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0"
-              src={imageUrl}
-              alt="House of DaySpring gallery item"
-              loading="lazy"
-            />
-          ))}
-        </motion.div>
+    <div className="relative w-full max-w-sm mx-auto pt-5 pb-10 px-4 flex items-center justify-center overflow-visible select-none">
+      <div className="relative w-full h-[255px] flex items-center justify-center">
+        {MOBILE_HERO_CARDS.map((card, idx) => {
+          const slot = getSlot(idx)
+          const isCenter = slot === 'center'
+          const isLeft = slot === 'left'
 
-        {/* Column 2 */}
-        <motion.div className="flex flex-col gap-1.5 mt-[-6%] border-0" style={{ y: y2 }}>
-          {IMAGES_2.map((imageUrl, index) => (
-            <img
-              key={index}
-              className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0"
-              src={imageUrl}
-              alt="House of DaySpring gallery item"
-              loading="lazy"
-            />
-          ))}
-        </motion.div>
-
-        {/* Column 3 */}
-        <motion.div className="flex flex-col gap-1.5 border-0" style={{ y: y3 }}>
-          {IMAGES_3.map((imageUrl, index) => (
-            <img
-              key={index}
-              className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0"
-              src={imageUrl}
-              alt="House of DaySpring gallery item"
-              loading="lazy"
-            />
-          ))}
-        </motion.div>
-      </motion.div>
+          return (
+            <motion.div
+              key={card.id}
+              onClick={() => setActiveIdx(idx)}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -30) {
+                  setActiveIdx((prev) => (prev + 1) % 3)
+                } else if (info.offset.x > 30) {
+                  setActiveIdx((prev) => (prev + 2) % 3)
+                }
+              }}
+              initial={false}
+              animate={{
+                x: isCenter ? '0%' : isLeft ? '-46%' : '46%',
+                y: isCenter ? 0 : 12,
+                rotate: isCenter ? 0 : isLeft ? -7.5 : 7.5,
+                scale: isCenter ? 1.05 : 0.94,
+                zIndex: isCenter ? 20 : 10,
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 280,
+                damping: 24,
+              }}
+              whileTap={{ scale: isCenter ? 1.02 : 0.96 }}
+              className={`absolute top-2 w-[42vw] max-w-[165px] min-w-[130px] aspect-[3/4.2] rounded-2xl overflow-hidden cursor-pointer bg-white transition-shadow duration-300 ${
+                isCenter
+                  ? 'shadow-[0_22px_45px_-12px_rgba(0,0,0,0.26)] ring-1 ring-black/5'
+                  : 'shadow-[0_14px_30px_-10px_rgba(0,0,0,0.18)] ring-1 ring-black/5'
+              }`}
+            >
+              <img
+                src={card.src}
+                alt={card.alt}
+                className="w-full h-full object-cover pointer-events-none"
+                loading="eager"
+              />
+            </motion.div>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -150,9 +159,9 @@ export default function Home() {
           </ContainerAnimated>
         </ContainerStagger>
 
-        {/* ── Mobile: Animated 3D Gallery in natural flow (No gap) ── */}
+        {/* ── Mobile: 3-Card Fanned Showcase (Image 2 style) ── */}
         <div className="sm:hidden">
-          <MobileGallery />
+          <MobileHeroCards />
         </div>
 
         {/* ── Desktop: Full 3D Animated Scroll Gallery ── */}
