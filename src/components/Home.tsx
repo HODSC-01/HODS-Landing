@@ -77,22 +77,22 @@ export default function Home() {
 
         {/* ── Mobile: Same animated gallery, portrait images to fill viewport ── */}
         <div className="sm:hidden">
-          <ContainerScroll className="relative h-[150vh] w-full px-1.5 border-0 -mt-4">
-            <ContainerSticky className="h-screen w-full border-0 items-center justify-center pt-14 pb-4">
-              <GalleryContainer className="w-full border-0 pt-0 pb-0 gap-1.5">
+          <ContainerScroll className="relative min-h-0 h-[105vh] w-full px-1.5 border-0 -mt-4 -mb-10 sm:mb-0">
+            <ContainerSticky className="h-auto w-full border-0 items-start pt-14 pb-0">
+              <GalleryContainer className="w-full h-auto border-0 pt-0 pb-0 gap-1.5">
                 <GalleryCol yRange={['-6%', '2%']} className="mt-0 border-0 gap-1.5">
                   {IMAGES_1.map((imageUrl, index) => (
-                    <img key={index} className="aspect-[4/5] block h-auto max-h-full w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
+                    <img key={index} className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
                   ))}
                 </GalleryCol>
                 <GalleryCol className="mt-[-6%] border-0 gap-1.5" yRange={['6%', '1%']}>
                   {IMAGES_2.map((imageUrl, index) => (
-                    <img key={index} className="aspect-[4/5] block h-auto max-h-full w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
+                    <img key={index} className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
                   ))}
                 </GalleryCol>
                 <GalleryCol yRange={['-6%', '2%']} className="mt-0 border-0 gap-1.5">
                   {IMAGES_3.map((imageUrl, index) => (
-                    <img key={index} className="aspect-[4/5] block h-auto max-h-full w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
+                    <img key={index} className="aspect-[4/5] block h-auto w-full rounded-lg object-cover shadow-md border-0" src={imageUrl} alt="House of DaySpring gallery item" />
                   ))}
                 </GalleryCol>
               </GalleryContainer>
