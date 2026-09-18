@@ -141,30 +141,27 @@ export default function Navbar({ logoTargetRef, borderBottom = false }: NavbarPr
             </button>
 
             {dropdownOpen && (
-              <div className="absolute top-full right-0 mt-3 w-48 bg-white/95 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-[0_15px_35px_-5px_rgba(0,0,0,0.12),0_5px_15px_rgba(0,0,0,0.06)] p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute top-full right-0 mt-3 w-44 bg-white/95 backdrop-blur-xl border border-gray-100 rounded-2xl shadow-[0_15px_35px_-5px_rgba(0,0,0,0.12),0_5px_15px_rgba(0,0,0,0.06)] p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <a
                   href="#services"
                   onClick={(e) => handleNavClick(e, 'services')}
-                  className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-[#5a6080] hover:text-[#1a2090] hover:bg-[#1a2090]/5 transition-colors"
+                  className="block px-4 py-2.5 rounded-xl text-sm font-medium text-[#5a6080] hover:text-[#1a2090] hover:bg-[#1a2090]/5 transition-colors"
                 >
-                  <span className="text-base leading-none">🗓</span>
-                  <span>Services</span>
+                  Services
                 </a>
                 <a
                   href="#directions"
                   onClick={(e) => handleNavClick(e, 'directions')}
-                  className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-[#5a6080] hover:text-[#1a2090] hover:bg-[#1a2090]/5 transition-colors"
+                  className="block px-4 py-2.5 rounded-xl text-sm font-medium text-[#5a6080] hover:text-[#1a2090] hover:bg-[#1a2090]/5 transition-colors"
                 >
-                  <span className="text-base leading-none">📍</span>
-                  <span>Directions</span>
+                  Directions
                 </a>
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, 'contact')}
-                  className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-medium text-[#5a6080] hover:text-[#1a2090] hover:bg-[#1a2090]/5 transition-colors"
+                  className="block px-4 py-2.5 rounded-xl text-sm font-medium text-[#5a6080] hover:text-[#1a2090] hover:bg-[#1a2090]/5 transition-colors"
                 >
-                  <span className="text-base leading-none">✉️</span>
-                  <span>Contact</span>
+                  Contact
                 </a>
               </div>
             )}
