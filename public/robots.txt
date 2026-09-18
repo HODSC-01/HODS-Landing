@@ -1,0 +1,90 @@
+# ==============================================================================
+# House of Dayspring International Church (HODi)
+# Robots.txt — Search Engine Optimization & Scraper Protection
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. ALLOW SEARCH ENGINES FOR TOP RANKINGS (Google Chrome, Bing, Apple, etc.)
+# ------------------------------------------------------------------------------
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: Slurp
+User-agent: Baiduspider
+User-agent: YandexBot
+Allow: /
+Disallow: /api/
+Disallow: /scratch/
+
+# ------------------------------------------------------------------------------
+# 2. BLOCK AI SCRAPERS AND MASS HARVESTING CRAWLERS
+# ------------------------------------------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+# ------------------------------------------------------------------------------
+# 3. DEFAULT RULES FOR ALL OTHER USER-AGENTS
+# ------------------------------------------------------------------------------
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /scratch/
+Crawl-delay: 5
+
+# ------------------------------------------------------------------------------
+# 4. SITEMAP LOCATION
+# ------------------------------------------------------------------------------
+Sitemap: https://houseofdayspring.org/sitemap.xml

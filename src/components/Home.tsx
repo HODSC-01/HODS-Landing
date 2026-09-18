@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import welcomeImg from '../assets/welcometohod.png'
 import church1 from '../assets/heroimg/church-1.jpg'
@@ -368,13 +369,18 @@ export default function Home() {
                 <li><a href="#home" className="hover:text-white transition-colors">Home</a></li>
                 <li><a href="#about" className="hover:text-white transition-colors">Who We Are</a></li>
                 <li>
-                  <a href="/live" className="inline-flex items-center gap-1.5 hover:text-red-400 transition-colors font-semibold text-red-400">
+                  <Link to="/live" className="inline-flex items-center gap-1.5 hover:text-red-400 transition-colors font-semibold text-red-400">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
                     </span>
                     Watch Live
-                  </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/give" className="hover:text-white transition-colors">
+                    Give Online
+                  </Link>
                 </li>
                 <li><a href="#sermons" className="hover:text-white transition-colors">Sermons</a></li>
                 <li><a href="#services" className="hover:text-white transition-colors">Weekly Services</a></li>
@@ -411,29 +417,31 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Giant HODi spread out from left to right in clean bold Arial/Tahoma font with sharp border */}
-          <div className="relative w-full overflow-hidden pt-6 sm:pt-8 pb-0 -mb-2 sm:-mb-3 md:-mb-4 select-none pointer-events-none px-2 sm:px-6 md:px-10">
+          {/* Giant HODi in bold, tight, borderless typography */}
+          <div className="relative w-full overflow-hidden pt-4 sm:pt-6 pb-0 -mb-2 sm:-mb-3 md:-mb-4 select-none pointer-events-none flex items-center justify-center">
             <div
-              className="w-full flex items-center justify-between text-[clamp(4.2rem,18vw,16rem)] leading-none text-transparent"
+              className="text-center font-black tracking-[-0.07em] text-[clamp(4.5rem,22vw,18rem)] leading-[0.85] text-transparent select-none"
               style={{
                 fontFamily: 'Arial, Tahoma, "Helvetica Neue", sans-serif',
-                fontWeight: 700,
-                WebkitTextStroke: '2px rgba(255, 255, 255, 0.48)',
-                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.03) 100%)',
+                fontWeight: 900,
+                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 100%)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
-                filter: 'drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5))',
               }}
             >
-              <span>H</span>
-              <span>O</span>
-              <span>D</span>
-              <span className="normal-case">i</span>
+              HOD<span className="normal-case">i</span>
             </div>
           </div>
 
         </div>
       </footer>
+
+      {/* ── Below Footer: Built by Tech Expo ── */}
+      <div className="w-full bg-white py-4 text-center text-xs text-slate-500 border-t border-slate-100">
+        <p>
+          Built by <span className="font-semibold text-slate-800">Tech Expo</span>
+        </p>
+      </div>
 
     </div>
   )

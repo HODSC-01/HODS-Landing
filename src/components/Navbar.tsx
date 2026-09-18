@@ -1,20 +1,25 @@
-import { useState, useEffect, type RefObject, type MouseEvent } from 'react'
+import { useState, useEffect, useRef, type RefObject, type MouseEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import welcomeImg from '../assets/welcometohod.png'
 
 interface NavbarProps {
-  logoTargetRef: RefObject<HTMLDivElement | null>
+  logoTargetRef?: RefObject<HTMLDivElement | null>
+  borderBottom?: boolean
 }
 
-export default function Navbar({ logoTargetRef }: NavbarProps) {
+export default function Navbar({ logoTargetRef, borderBottom = false }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
   const navigate = useNavigate()
+  const fallbackLogoRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const effectiveLogoRef = logoTargetRef || fallbackLogoRef
 
   useEffect(() => {
     const handleScroll = () => {
       // Glassmorph the header as soon as user scrolls down
-      setIsScrolled(window.scrollY > 30)
+      setIsScrolled(window.scrollY > 10)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -22,12 +27,29 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleClickOutside = (e: globalThis.MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
     setMobileMenuOpen(false)
+    setDropdownOpen(false)
     const el = document.getElementById(id)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      if (id === 'home') {
+        navigate('/')
+      } else {
+        navigate('/#' + id)
+      }
     }
   }
 
@@ -37,15 +59,17 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
     navigate('/live')
   }
 
+  const showActiveStyle = isScrolled || mobileMenuOpen || borderBottom
+
   return (
     <header
       className={[
         'fixed top-0 left-0 right-0 z-40 transition-all duration-300 will-change-[background,backdrop-filter]',
-        isScrolled || mobileMenuOpen
-          ? 'bg-white/85 shadow-sm border-b border-white/60'
+        showActiveStyle
+          ? 'bg-white/90 shadow-xs border-b border-gray-100/90'
           : 'bg-transparent border-0',
       ].join(' ')}
-      style={isScrolled || mobileMenuOpen ? {
+      style={showActiveStyle ? {
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
       } : undefined}
@@ -59,7 +83,7 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
           className="flex items-center gap-2.5 sm:gap-3.5"
         >
           <div
-            ref={logoTargetRef}
+            ref={effectiveLogoRef}
             className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center relative shrink-0"
           >
             <img
@@ -74,7 +98,7 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
           </span>
         </a>
 
-        {/* Desktop Nav Links */}
+        {/* Desktop Nav Links: 5 main items + dropdown */}
         <nav className="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-[#5a6080]">
           <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="hover:text-[#1a2090] transition-colors">Home</a>
           <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-[#1a2090] transition-colors">About Us</a>
@@ -90,9 +114,58 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
             Watch Live
           </Link>
           <a href="#sermons" onClick={(e) => handleNavClick(e, 'sermons')} className="hover:text-[#1a2090] transition-colors">Sermons</a>
-          <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="hover:text-[#1a2090] transition-colors">Services</a>
-          <a href="#directions" onClick={(e) => handleNavClick(e, 'directions')} className="hover:text-[#1a2090] transition-colors">Directions</a>
-          <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="hover:text-[#1a2090] transition-colors">Contact</a>
+          <Link
+            to="/give"
+            className="hover:text-[#1a2090] transition-colors font-medium"
+          >
+            Give
+          </Link>
+
+          {/* Dropdown for remaining items: Services, Directions, Contact */}
+          <div ref={dropdownRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="inline-flex items-center gap-1 hover:text-[#1a2090] transition-colors focus:outline-none cursor-pointer"
+            >
+              <span>More</span>
+              <svg
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute top-full right-0 mt-3 w-44 bg-white/95 backdrop-blur-xl border border-gray-100 rounded-xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <a
+                  href="#services"
+                  onClick={(e) => handleNavClick(e, 'services')}
+                  className="block px-4 py-2 text-sm text-[#5a6080] hover:text-[#1a2090] hover:bg-slate-50 transition-colors"
+                >
+                  Services
+                </a>
+                <a
+                  href="#directions"
+                  onClick={(e) => handleNavClick(e, 'directions')}
+                  className="block px-4 py-2 text-sm text-[#5a6080] hover:text-[#1a2090] hover:bg-slate-50 transition-colors"
+                >
+                  Directions
+                </a>
+                <a
+                  href="#contact"
+                  onClick={(e) => handleNavClick(e, 'contact')}
+                  className="block px-4 py-2 text-sm text-[#5a6080] hover:text-[#1a2090] hover:bg-slate-50 transition-colors"
+                >
+                  Contact
+                </a>
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Right side: Desktop CTA + Mobile Hamburger Button */}
@@ -158,6 +231,17 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
               </span>
               Watch Live
             </a>
+            {/* Give Online → /give page */}
+            <Link
+              to="/give"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2 border-b border-gray-50 flex items-center justify-between hover:text-[#1a2090] transition-colors"
+            >
+              <span>Give Online</span>
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/60">
+                Offering &amp; Tithe
+              </span>
+            </Link>
             <a
               href="#sermons"
               onClick={(e) => handleNavClick(e, 'sermons')}

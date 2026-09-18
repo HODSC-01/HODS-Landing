@@ -4,30 +4,39 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Splash from './components/Splash'
 import LivePage from './pages/LivePage'
+import GivePage from './pages/GivePage'
 
-function MainSite() {
-  const [showSplash, setShowSplash] = useState(true)
+function MainSite({
+  hasSeenSplash,
+  onSplashDone,
+}: {
+  hasSeenSplash: boolean
+  onSplashDone: () => void
+}) {
+  const [showSplash, setShowSplash] = useState(!hasSeenSplash)
   const logoTargetRef = useRef<HTMLDivElement>(null)
 
-  // ── Always start at the beginning on reload ──
+  // ── Scroll management ──
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual'
     }
 
-    // Clear any hash fragment so browser doesn't anchor jump on reload
-    if (window.location.hash) {
+    // Only clear hash on initial fresh load if splash is active
+    if (showSplash && window.location.hash) {
       window.history.replaceState(null, '', window.location.pathname + window.location.search)
     }
 
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    if (showSplash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
 
     const handleBeforeUnload = () => {
       window.scrollTo(0, 0)
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
-  }, [])
+  }, [showSplash])
 
   // ── Lock scroll during intro splash ──
   useEffect(() => {
@@ -47,7 +56,8 @@ function MainSite() {
 
   const handleSplashDone = useCallback(() => {
     setShowSplash(false)
-  }, [])
+    onSplashDone()
+  }, [onSplashDone])
 
   return (
     <>
@@ -64,13 +74,25 @@ function MainSite() {
 }
 
 export default function App() {
+  const [hasSeenSplash, setHasSeenSplash] = useState(() => {
+    return sessionStorage.getItem('hod_splash_seen') === 'true'
+  })
+
+  const markSplashSeen = useCallback(() => {
+    setHasSeenSplash(true)
+    sessionStorage.setItem('hod_splash_seen', 'true')
+  }, [])
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainSite />} />
+        <Route
+          path="/"
+          element={<MainSite hasSeenSplash={hasSeenSplash} onSplashDone={markSplashSeen} />}
+        />
         <Route path="/live" element={<LivePage />} />
+        <Route path="/give" element={<GivePage />} />
       </Routes>
     </BrowserRouter>
   )
 }
-
