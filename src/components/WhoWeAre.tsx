@@ -69,10 +69,10 @@ export default function WhoWeAre({ pastorImage = pastorPlaceholder }: WhoWeArePr
           {/* Right Column: Content */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             
-            {/* Pill Badge */}
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-[#b5c778] bg-[#fbfdf7] text-[#2d3748] text-xs font-semibold tracking-wide mb-4 shadow-2xs">
+            {/* Section Tag */}
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#c9a030] mb-2 block">
               Who We Are
-            </div>
+            </span>
 
             {/* Main Heading */}
             <h2 className="text-[clamp(2.1rem,3.8vw,3.2rem)] font-extrabold tracking-tight text-[#111827] leading-[1.16] mb-3">
@@ -80,8 +80,8 @@ export default function WhoWeAre({ pastorImage = pastorPlaceholder }: WhoWeArePr
               <span className="text-[#005a9c] font-black">HODi</span>
             </h2>
 
-            {/* Pacesetters Assembly Tagline Banner */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1a2090]/10 text-[#1a2090] text-xs sm:text-sm font-bold tracking-wide mb-6">
+            {/* Pacesetters Assembly Tagline */}
+            <div className="flex items-center gap-2 text-sm sm:text-base font-bold text-[#1a2090] mb-5">
               <span className="w-2 h-2 rounded-full bg-[#c9a030]" />
               The Pacesetters Assembly
             </div>

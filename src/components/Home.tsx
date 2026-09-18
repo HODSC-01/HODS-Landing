@@ -120,11 +120,11 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-white text-[#1a1a2e] font-sans antialiased selection:bg-[#c9a030]/20 selection:text-[#1a2090] border-0 overflow-x-clip">
 
-      {/* ── Hero Section with Animated Scroll Gallery (No Borders, No Frame) ── */}
-      <section id="home" className="relative bg-white pt-24 border-0 overflow-x-clip">
+      {/* ── Hero Section with 3D Perspective Showcase (No Borders, No Huge Gaps) ── */}
+      <section id="home" className="relative bg-white pt-28 sm:pt-32 border-0 overflow-x-clip">
 
         {/* Hero Header Text */}
-        <ContainerStagger className="relative z-20 max-w-4xl mx-auto px-6 pt-2 pb-1 mb-2 text-center border-0">
+        <ContainerStagger className="relative z-20 max-w-4xl mx-auto px-6 pt-2 pb-1 text-center border-0">
           <ContainerAnimated>
             <h1 className="text-[clamp(2rem,5.5vw,4.6rem)] font-bold leading-[1.08] tracking-tight text-[#1a1a2e]">
               A Place of Light,<br />
@@ -132,15 +132,15 @@ export default function Home() {
             </h1>
           </ContainerAnimated>
 
-          <ContainerAnimated className="my-3">
-            <p className="text-[1.05rem] sm:text-[1.1rem] leading-relaxed text-[#5a6080] max-w-xl mx-auto">
+          <ContainerAnimated className="my-3 sm:my-4">
+            <p className="text-[1.05rem] sm:text-[1.15rem] leading-relaxed text-[#5a6080] max-w-xl mx-auto">
               We are a welcoming family of faith walking together in love, hope, and grace.
             </p>
           </ContainerAnimated>
 
-          <ContainerAnimated className="flex items-center justify-center flex-wrap gap-3 mt-1">
+          <ContainerAnimated className="flex items-center justify-center flex-wrap gap-3 mt-2 sm:mt-3">
             <Button
-              className="px-7 py-3 rounded-full text-sm font-semibold text-white bg-[#1a2090] hover:bg-[#3040cc] transition-all cursor-pointer border-0"
+              className="px-7 py-3 rounded-full text-sm font-semibold text-white bg-[#1a2090] hover:bg-[#3040cc] transition-all cursor-pointer border-0 shadow-md hover:shadow-lg"
               onClick={() => {
                 const el = document.getElementById('services')
                 el?.scrollIntoView({ behavior: 'smooth' })
@@ -150,7 +150,7 @@ export default function Home() {
             </Button>
             <Button
               variant="link"
-              className="text-sm font-semibold text-[#1a2090] cursor-pointer"
+              className="text-sm font-semibold text-[#1a2090] cursor-pointer hover:underline"
               onClick={() => {
                 const el = document.getElementById('about')
                 el?.scrollIntoView({ behavior: 'smooth' })
@@ -161,49 +161,51 @@ export default function Home() {
           </ContainerAnimated>
         </ContainerStagger>
 
-        {/* ── Mobile: 3-Card Fanned Showcase (Image 2 style) ── */}
-        <div className="sm:hidden">
+        {/* ── Mobile: 3-Card Fanned Showcase (< 640px) ── */}
+        <div className="sm:hidden mt-4">
           <MobileHeroCards />
         </div>
 
-        {/* ── Desktop: Full 3D Animated Scroll Gallery ── */}
-        <div className="hidden sm:block">
-          <ContainerScroll className="relative h-[165vh] w-full px-6 md:px-10 border-0 -mt-12 -mb-4 md:-mb-6">
-            <ContainerSticky className="h-screen w-full border-0 items-start pt-4">
-              <GalleryContainer className="w-full border-0 pt-0 pb-0 gap-2">
-                <GalleryCol yRange={['-6%', '2%']} className="mt-0 border-0 gap-2">
-                  {IMAGES_1.map((imageUrl, index) => (
-                    <img
-                      key={index}
-                      className="aspect-video block h-auto max-h-full w-full rounded-xl object-cover shadow-md border-0"
-                      src={imageUrl}
-                      alt="House of Dayspring gallery item"
-                    />
-                  ))}
-                </GalleryCol>
-                <GalleryCol className="mt-[-10%] border-0 gap-2" yRange={['8%', '2%']}>
-                  {IMAGES_2.map((imageUrl, index) => (
-                    <img
-                      key={index}
-                      className="aspect-video block h-auto max-h-full w-full rounded-xl object-cover shadow-md border-0"
-                      src={imageUrl}
-                      alt="House of Dayspring gallery item"
-                    />
-                  ))}
-                </GalleryCol>
-                <GalleryCol yRange={['-6%', '2%']} className="mt-0 border-0 gap-2">
-                  {IMAGES_3.map((imageUrl, index) => (
-                    <img
-                      key={index}
-                      className="aspect-video block h-auto max-h-full w-full rounded-xl object-cover shadow-md border-0"
-                      src={imageUrl}
-                      alt="House of Dayspring gallery item"
-                    />
-                  ))}
-                </GalleryCol>
-              </GalleryContainer>
-            </ContainerSticky>
-          </ContainerScroll>
+        {/* ── Desktop & Tablet: Seamless 3D Perspective Gallery (>= 640px) ── */}
+        <div className="hidden sm:block mt-6 sm:mt-8 md:mt-10 mb-4 sm:mb-8">
+          <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_85%,transparent_100%)]">
+            <ContainerScroll className="w-full h-full border-0">
+              <ContainerSticky className="w-full h-full border-0 items-start">
+                <GalleryContainer className="w-full border-0 pt-0 pb-0 gap-3 md:gap-4">
+                  <GalleryCol yRange={['-5%', '5%']} className="mt-0 border-0 gap-3 md:gap-4">
+                    {IMAGES_1.map((imageUrl, index) => (
+                      <img
+                        key={index}
+                        className="aspect-video block h-auto w-full rounded-2xl object-cover shadow-[0_12px_28px_-8px_rgba(0,0,0,0.22)] border border-black/5"
+                        src={imageUrl}
+                        alt="House of Dayspring gallery item"
+                      />
+                    ))}
+                  </GalleryCol>
+                  <GalleryCol className="mt-[-6%] border-0 gap-3 md:gap-4" yRange={['5%', '-5%']}>
+                    {IMAGES_2.map((imageUrl, index) => (
+                      <img
+                        key={index}
+                        className="aspect-video block h-auto w-full rounded-2xl object-cover shadow-[0_12px_28px_-8px_rgba(0,0,0,0.22)] border border-black/5"
+                        src={imageUrl}
+                        alt="House of Dayspring gallery item"
+                      />
+                    ))}
+                  </GalleryCol>
+                  <GalleryCol yRange={['-5%', '5%']} className="mt-0 border-0 gap-3 md:gap-4">
+                    {IMAGES_3.map((imageUrl, index) => (
+                      <img
+                        key={index}
+                        className="aspect-video block h-auto w-full rounded-2xl object-cover shadow-[0_12px_28px_-8px_rgba(0,0,0,0.22)] border border-black/5"
+                        src={imageUrl}
+                        alt="House of Dayspring gallery item"
+                      />
+                    ))}
+                  </GalleryCol>
+                </GalleryContainer>
+              </ContainerSticky>
+            </ContainerScroll>
+          </div>
         </div>
       </section>
 

@@ -56,17 +56,16 @@ export const ContainerScroll = ({
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: scrollRef,
-    offset: ['start start', 'end end'],
+    offset: ['start end', 'end start'],
   })
   return (
     <ContainerScrollContext.Provider value={{ scrollYProgress }}>
       <div
         ref={scrollRef}
-        className={cn('relative min-h-[120vh] border-0', className)}
+        className={cn('relative w-full h-full overflow-hidden border-0', className)}
         style={{
-          perspective: '1000px',
-          perspectiveOrigin: 'center top',
-          transformStyle: 'preserve-3d',
+          perspective: '1200px',
+          perspectiveOrigin: 'center 20%',
           ...style,
         }}
         {...props}
@@ -86,14 +85,13 @@ export const ContainerSticky = ({
   return (
     <div
       className={cn(
-        'sticky top-0 h-screen w-full flex items-center justify-center overflow-visible border-0',
+        'relative w-full h-full flex items-center justify-center overflow-visible border-0',
         className
       )}
       style={{
         perspective: '1200px',
-        perspectiveOrigin: 'center center',
+        perspectiveOrigin: 'center 20%',
         transformStyle: 'preserve-3d',
-        transformOrigin: '50% 50%',
         ...style,
       }}
       {...props}
@@ -109,19 +107,20 @@ export const GalleryContainer = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & HTMLMotionProps<'div'>) => {
   const { scrollYProgress } = useContainerScrollContext()
-  const rotateX = useTransform(scrollYProgress, [0, 0.45], [45, 0])
-  const scale = useTransform(scrollYProgress, [0.3, 0.75], [1.1, 1])
+  const rotateX = useTransform(scrollYProgress, [0, 1], [28, 14])
+  const scale = useTransform(scrollYProgress, [0, 1], [1.02, 0.98])
 
   return (
     <motion.div
       className={cn(
-        'relative grid size-full grid-cols-3 gap-2 md:gap-6 pt-10 md:pt-16 pb-6 md:pb-12 border-0 overflow-visible',
+        'relative grid w-full grid-cols-3 gap-3 md:gap-5 pt-2 pb-6 border-0 overflow-visible',
         className
       )}
       style={{
         rotateX,
         scale,
         transformStyle: 'preserve-3d',
+        transformOrigin: '50% 10%',
         perspective: '1200px',
         ...style,
       }}
@@ -136,16 +135,15 @@ GalleryContainer.displayName = 'GalleryContainer'
 export const GalleryCol = ({
   className,
   style,
-  yRange = ['0%', '-10%'],
+  yRange = ['-5%', '5%'],
   ...props
 }: HTMLMotionProps<'div'> & { yRange?: string[] }) => {
   const { scrollYProgress } = useContainerScrollContext()
-  // Completes smoothly at 0.82 so the animation is 100% finished before page unpins and scrolls away
-  const y = useTransform(scrollYProgress, [0.15, 0.82], yRange)
+  const y = useTransform(scrollYProgress, [0, 1], yRange)
 
   return (
     <motion.div
-      className={cn('relative flex w-full flex-col gap-2 border-0', className)}
+      className={cn('relative flex w-full flex-col gap-3 md:gap-4 border-0', className)}
       style={{
         y,
         ...style,

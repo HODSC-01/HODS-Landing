@@ -14,10 +14,10 @@ export default function SermonsSection({
         {/* Left Column: Bold Catch-Up Messaging (Compact Height) */}
         <div className="lg:col-span-5 px-6 sm:px-10 lg:px-14 py-8 sm:py-10 flex flex-col justify-center items-start text-left">
           
-          {/* Pill Badge */}
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full border border-white/40 bg-white/10 text-white text-xs font-semibold tracking-wide mb-3 backdrop-blur-xs">
+          {/* Section Tag */}
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#b9d529] mb-3 block">
             Missed Service?
-          </div>
+          </span>
 
           {/* Catch Up Heading */}
           <h2 className="text-[clamp(2rem,3.6vw,3.2rem)] font-black text-white leading-[1.02] tracking-tight uppercase">
