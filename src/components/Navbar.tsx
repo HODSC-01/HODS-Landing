@@ -1,4 +1,5 @@
 import { useState, useEffect, type RefObject, type MouseEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import welcomeImg from '../assets/welcometohod.png'
 
 interface NavbarProps {
@@ -8,6 +9,7 @@ interface NavbarProps {
 export default function Navbar({ logoTargetRef }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +29,12 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+
+  const handleWatchLive = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setMobileMenuOpen(false)
+    navigate('/live')
   }
 
   return (
@@ -70,6 +78,17 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
         <nav className="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-[#5a6080]">
           <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="hover:text-[#1a2090] transition-colors">Home</a>
           <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-[#1a2090] transition-colors">About Us</a>
+          {/* Watch Live — navigates to /live page */}
+          <Link
+            to="/live"
+            className="inline-flex items-center gap-1.5 text-red-600 hover:text-red-700 transition-colors font-semibold"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+            </span>
+            Watch Live
+          </Link>
           <a href="#sermons" onClick={(e) => handleNavClick(e, 'sermons')} className="hover:text-[#1a2090] transition-colors">Sermons</a>
           <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="hover:text-[#1a2090] transition-colors">Services</a>
           <a href="#directions" onClick={(e) => handleNavClick(e, 'directions')} className="hover:text-[#1a2090] transition-colors">Directions</a>
@@ -126,6 +145,18 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
               className="py-2 hover:text-[#1a2090] transition-colors border-b border-gray-50"
             >
               About Us
+            </a>
+            {/* Watch Live → /live page */}
+            <a
+              href="/live"
+              onClick={handleWatchLive}
+              className="py-2 border-b border-gray-50 flex items-center gap-2 font-semibold text-red-600"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+              </span>
+              Watch Live
             </a>
             <a
               href="#sermons"

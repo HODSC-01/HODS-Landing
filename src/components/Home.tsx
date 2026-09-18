@@ -367,6 +367,15 @@ export default function Home() {
               <ul className="space-y-2.5 text-sm text-[#cbd5e1]">
                 <li><a href="#home" className="hover:text-white transition-colors">Home</a></li>
                 <li><a href="#about" className="hover:text-white transition-colors">Who We Are</a></li>
+                <li>
+                  <a href="/live" className="inline-flex items-center gap-1.5 hover:text-red-400 transition-colors font-semibold text-red-400">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+                    </span>
+                    Watch Live
+                  </a>
+                </li>
                 <li><a href="#sermons" className="hover:text-white transition-colors">Sermons</a></li>
                 <li><a href="#services" className="hover:text-white transition-colors">Weekly Services</a></li>
                 <li><a href="#directions" className="hover:text-white transition-colors">Directions</a></li>

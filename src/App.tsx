@@ -1,9 +1,11 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Splash from './components/Splash'
+import LivePage from './pages/LivePage'
 
-export default function App() {
+function MainSite() {
   const [showSplash, setShowSplash] = useState(true)
   const logoTargetRef = useRef<HTMLDivElement>(null)
 
@@ -55,9 +57,20 @@ export default function App() {
           logoTargetRef={logoTargetRef}
         />
       )}
-
       <Navbar logoTargetRef={logoTargetRef} />
       <Home />
     </>
   )
 }
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainSite />} />
+        <Route path="/live" element={<LivePage />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
