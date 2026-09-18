@@ -7,7 +7,7 @@ export const testimonials = [
   {
     name: 'Ava Green',
     username: '@ava',
-    body: 'House of DaySpring welcomed my family with open arms. The worship and sermons are truly life changing!',
+    body: 'House of Dayspring welcomed my family with open arms. The worship and sermons are truly life changing!',
     img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
     country: '🇦🇺 Australia',
   },
@@ -63,7 +63,7 @@ export const testimonials = [
   {
     name: 'Carlos Ray',
     username: '@carl',
-    body: 'Wonderful community and authentic fellowship. Blessed to call House of DaySpring my home.',
+    body: 'Wonderful community and authentic fellowship. Blessed to call House of Dayspring my home.',
     img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80',
     country: '🇪🇸 Spain',
   },

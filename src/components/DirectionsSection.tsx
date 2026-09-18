@@ -6,8 +6,8 @@ interface DirectionsSectionProps {
 }
 
 export default function DirectionsSection({
-  address = 'House of DaySpring Main Auditorium',
-  googleMapsQuery = 'House of DaySpring',
+  address = 'House of Dayspring International Church Main Auditorium',
+  googleMapsQuery = 'House of Dayspring International Church',
 }: DirectionsSectionProps) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(googleMapsQuery)}`
 
@@ -21,7 +21,7 @@ export default function DirectionsSection({
             Plan Your Visit
           </span>
           <h2 className="text-[clamp(2rem,4vw,2.8rem)] font-bold tracking-tight text-[#1a2090] mt-2 mb-4">
-            Directions to HODS
+            Directions to HODi
           </h2>
           <p className="text-sm sm:text-base text-[#5a6080] leading-relaxed">
             We can't wait to welcome you! Whether it's your first time or your hundredth, here is everything you need to find us easily.
@@ -41,7 +41,7 @@ export default function DirectionsSection({
               </div>
 
               <h3 className="text-2xl font-bold text-[#1a1a2e] mb-2">
-                House of DaySpring
+                House of Dayspring International Church
               </h3>
               <p className="text-sm text-[#5a6080] mb-6 leading-relaxed">
                 {address}
@@ -99,7 +99,7 @@ export default function DirectionsSection({
           {/* Right Column: Google Maps Embed Frame */}
           <div className="lg:col-span-7 rounded-3xl overflow-hidden shadow-md border border-gray-200 bg-white relative min-h-[350px] sm:min-h-[420px] flex flex-col">
             <iframe
-              title="Directions to House of DaySpring"
+              title="Directions to House of Dayspring International Church"
               className="w-full h-full min-h-[350px] sm:min-h-[420px] border-0"
               loading="lazy"
               allowFullScreen
@@ -108,7 +108,7 @@ export default function DirectionsSection({
             />
             {/* Quick map bottom link bar */}
             <div className="bg-[#fcfbf9] px-6 py-3 border-t border-gray-100 flex items-center justify-between text-xs text-[#5a6080]">
-              <span>House of DaySpring Main Campus</span>
+              <span>House of Dayspring Main Campus</span>
               <a
                 href={mapsUrl}
                 target="_blank"

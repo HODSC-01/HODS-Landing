@@ -59,7 +59,7 @@ export default function SermonsSection({
             <iframe
               className="w-full h-full object-cover border-0"
               src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&color=white`}
-              title="House of DaySpring Featured Sermon"
+              title="House of Dayspring Featured Sermon"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />

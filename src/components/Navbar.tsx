@@ -56,13 +56,13 @@ export default function Navbar({ logoTargetRef }: NavbarProps) {
           >
             <img
               src={welcomeImg}
-              alt="House of DaySpring logo"
+              alt="House of Dayspring logo"
               className="w-10 sm:w-12 h-auto max-h-12 object-contain select-none"
             />
           </div>
 
           <span className="font-bold text-lg sm:text-xl tracking-tight text-[#1a2090] whitespace-nowrap">
-            House of <span className="text-gradient-gold">DaySpring</span>
+            House of <span className="text-gradient-gold">Dayspring</span>
           </span>
         </a>
 

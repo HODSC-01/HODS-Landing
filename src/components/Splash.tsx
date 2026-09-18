@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import welcomeImg from '../assets/welcometohod.png'
 import splashAudioSrc from '../assets/splashupgrade.mp3'
 
-const FULL_TEXT = 'Welcome to House of DaySpring'
+const FULL_TEXT = 'Welcome to House of Dayspring International Church'
 
 interface SplashProps {
   onDone: () => void

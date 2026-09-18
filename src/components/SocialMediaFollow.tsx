@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'motion/react'
 
 const SOCIAL_ICONS = [
   {
-    name: 'Facebook',
-    url: 'https://facebook.com',
+    name: 'Facebook Page',
+    badge: null,
+    url: 'https://www.facebook.com/hodayspringpage',
     bgColor: 'bg-[#1877F2]',
     icon: (
       <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
@@ -13,8 +14,20 @@ const SOCIAL_ICONS = [
     ),
   },
   {
+    name: 'Facebook Live',
+    badge: 'LIVE',
+    url: 'https://www.facebook.com/HODLiveFeed?mibextid=ZbWKwL',
+    bgColor: 'bg-gradient-to-tr from-[#1877F2] to-[#dc2626]',
+    icon: (
+      <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    ),
+  },
+  {
     name: 'Instagram',
-    url: 'https://instagram.com',
+    badge: null,
+    url: 'https://www.instagram.com/houseofdayspring/',
     bgColor: 'bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]',
     icon: (
       <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
@@ -23,42 +36,24 @@ const SOCIAL_ICONS = [
     ),
   },
   {
+    name: 'Telegram Channel',
+    badge: null,
+    url: 'https://t.me/hodmessages',
+    bgColor: 'bg-[#229ED9]',
+    icon: (
+      <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.37.74-.56 2.91-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+      </svg>
+    ),
+  },
+  {
     name: 'YouTube',
-    url: 'https://youtube.com',
+    badge: null,
+    url: 'https://youtu.be/ecvL6A39Nuc',
     bgColor: 'bg-[#FF0000]',
     icon: (
       <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-      </svg>
-    ),
-  },
-  {
-    name: 'Spotify',
-    url: 'https://spotify.com',
-    bgColor: 'bg-[#1DB954]',
-    icon: (
-      <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
-        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.502 17.307c-.218.358-.682.474-1.04.256-2.853-1.744-6.444-2.138-10.677-1.171-.41.094-.813-.162-.907-.572-.094-.41.162-.813.572-.907 4.634-1.06 8.601-.611 11.794 1.346.357.218.473.682.256 1.04-.002.002-.002.002-.002.002zm1.472-3.266c-.275.447-.859.59-1.306.315-3.266-2.008-8.243-2.59-12.106-1.417-.504.153-1.036-.135-1.189-.639-.153-.504.135-1.036.639-1.189 4.417-1.341 9.907-.69 13.647 1.624.447.275.59.859.315 1.306zm.126-3.41c-3.916-2.325-10.373-2.54-14.108-1.406-.6.183-1.237-.158-1.42-.758-.182-.6.159-1.237.759-1.42 4.298-1.305 11.423-1.054 15.932 1.622.54.32.715 1.02.395 1.56-.32.54-1.02.716-1.56.396-.002.002-.004.004-.006.006z"/>
-      </svg>
-    ),
-  },
-  {
-    name: 'TikTok',
-    url: 'https://tiktok.com',
-    bgColor: 'bg-black border border-white/20',
-    icon: (
-      <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
-        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-      </svg>
-    ),
-  },
-  {
-    name: 'X (Twitter)',
-    url: 'https://x.com',
-    bgColor: 'bg-[#0f1419] border border-white/20',
-    icon: (
-      <svg className="w-6 h-6 sm:w-7 sm:h-7 fill-current" viewBox="0 0 24 24">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
       </svg>
     ),
   },
@@ -114,37 +109,58 @@ export default function SocialMediaFollow() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xl cursor-pointer select-none"
             onClick={() => setIsOpen(false)}
           >
-            {/* Social Icons Container (Only the icons, popping out like bubbles) */}
+            {/* Social Icons Container (Bubbles with clear labels) */}
             <div
-              className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 max-w-lg cursor-default"
+              className="flex flex-col items-center gap-6 max-w-xl cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
-              {SOCIAL_ICONS.map((social, idx) => (
-                <motion.a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{
-                    scale: [0, 1.25, 0.95, 1],
-                    opacity: 1,
-                  }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 420,
-                    damping: 20,
-                    delay: idx * 0.05,
-                  }}
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.9 }}
-                  className={`size-16 sm:size-20 rounded-full ${social.bgColor} text-white flex items-center justify-center shadow-2xl transition-shadow duration-200 cursor-pointer`}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
+              <div className="text-center select-none mb-1">
+                <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#b9d529]">Connect With Us</span>
+                <h3 className="text-white text-xl sm:text-2xl font-bold mt-1">Join Our Online Community</h3>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7">
+                {SOCIAL_ICONS.map((social, idx) => (
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{
+                      scale: [0, 1.2, 0.95, 1],
+                      opacity: 1,
+                    }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 400,
+                      damping: 22,
+                      delay: idx * 0.05,
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.92 }}
+                    className="flex flex-col items-center gap-2 group cursor-pointer"
+                  >
+                    <div className={`relative size-16 sm:size-20 rounded-full ${social.bgColor} text-white flex items-center justify-center shadow-2xl transition-all duration-200 group-hover:shadow-[0_0_25px_rgba(255,255,255,0.4)]`}>
+                      {social.badge && (
+                        <span className="absolute -top-1 -right-1 px-1.5 py-0.5 rounded-full bg-red-600 text-[9px] font-black tracking-wider uppercase text-white shadow-md ring-2 ring-[#0a416e] animate-pulse">
+                          {social.badge}
+                        </span>
+                      )}
+                      {social.icon}
+                    </div>
+                    <span className="text-xs sm:text-sm font-semibold text-white/90 group-hover:text-white transition-colors text-center">
+                      {social.name}
+                    </span>
+                  </motion.a>
+                ))}
+              </div>
+
+              <p className="text-white/60 text-xs mt-2 select-none">
+                Tap outside to close
+              </p>
             </div>
           </motion.div>
         )}
