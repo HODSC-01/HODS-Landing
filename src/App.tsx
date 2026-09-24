@@ -74,6 +74,7 @@ function MainSite({
 }
 
 export default function App() {
+  const [showLaunchPage, setShowLaunchPage] = useState(() => !hasLaunchPassed())
   const [hasSeenSplash, setHasSeenSplash] = useState(() => {
     return hasLaunchPassed()
   })
@@ -83,6 +84,7 @@ export default function App() {
   }, [])
 
   const showSplashAfterLaunch = useCallback(() => {
+    setShowLaunchPage(false)
     setHasSeenSplash(false)
   }, [])
 
@@ -91,7 +93,11 @@ export default function App() {
       <Routes>
         <Route
           path="/"
-          element={<MainSite hasSeenSplash={hasSeenSplash} onSplashDone={markSplashSeen} />}
+          element={showLaunchPage ? (
+            <LaunchPage onShowSplash={showSplashAfterLaunch} />
+          ) : (
+            <MainSite hasSeenSplash={hasSeenSplash} onSplashDone={markSplashSeen} />
+          )}
         />
         <Route path="/launch" element={<LaunchPage onShowSplash={showSplashAfterLaunch} />} />
         <Route path="/give" element={<GivePage />} />
