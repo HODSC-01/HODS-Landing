@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Splash from './components/Splash'
-import LivePage from './pages/LivePage'
 import GivePage from './pages/GivePage'
+import LaunchPage, { hasLaunchPassed } from './pages/LaunchPage'
 
 function MainSite({
   hasSeenSplash,
@@ -75,12 +75,15 @@ function MainSite({
 
 export default function App() {
   const [hasSeenSplash, setHasSeenSplash] = useState(() => {
-    return sessionStorage.getItem('hod_splash_seen') === 'true'
+    return hasLaunchPassed()
   })
 
   const markSplashSeen = useCallback(() => {
     setHasSeenSplash(true)
-    sessionStorage.setItem('hod_splash_seen', 'true')
+  }, [])
+
+  const showSplashAfterLaunch = useCallback(() => {
+    setHasSeenSplash(false)
   }, [])
 
   return (
@@ -90,7 +93,7 @@ export default function App() {
           path="/"
           element={<MainSite hasSeenSplash={hasSeenSplash} onSplashDone={markSplashSeen} />}
         />
-        <Route path="/live" element={<LivePage />} />
+        <Route path="/launch" element={<LaunchPage onShowSplash={showSplashAfterLaunch} />} />
         <Route path="/give" element={<GivePage />} />
       </Routes>
     </BrowserRouter>

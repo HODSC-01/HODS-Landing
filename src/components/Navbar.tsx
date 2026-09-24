@@ -53,12 +53,6 @@ export default function Navbar({ logoTargetRef, borderBottom = false }: NavbarPr
     }
   }
 
-  const handleWatchLive = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setMobileMenuOpen(false)
-    navigate('/live')
-  }
-
   const showActiveStyle = isScrolled || mobileMenuOpen || borderBottom
 
   return (
@@ -102,17 +96,6 @@ export default function Navbar({ logoTargetRef, borderBottom = false }: NavbarPr
         <nav className="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-[#5a6080]">
           <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="hover:text-[#1a2090] transition-colors">Home</a>
           <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-[#1a2090] transition-colors">About Us</a>
-          {/* Watch Live — navigates to /live page */}
-          <Link
-            to="/live"
-            className="inline-flex items-center gap-1.5 text-red-600 hover:text-red-700 transition-colors font-semibold"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
-            </span>
-            Watch Live
-          </Link>
           <a href="#sermons" onClick={(e) => handleNavClick(e, 'sermons')} className="hover:text-[#1a2090] transition-colors">Sermons</a>
           <Link
             to="/give"
@@ -170,6 +153,13 @@ export default function Navbar({ logoTargetRef, borderBottom = false }: NavbarPr
 
         {/* Right side: Desktop CTA + Mobile Hamburger Button */}
         <div className="flex items-center gap-3">
+          <Link
+            to="/launch"
+            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full border border-[#1a2090]/15 bg-[#eef3ff] text-[#1a2090] text-xs font-bold tracking-wide transition-all hover:-translate-y-0.5 hover:bg-[#e3ebff] shadow-sm"
+          >
+            Preview
+          </Link>
+
           {/* Join CTA (Desktop & Tablet) */}
           <a
             href="#services"
@@ -219,18 +209,16 @@ export default function Navbar({ logoTargetRef, borderBottom = false }: NavbarPr
             >
               About Us
             </a>
-            {/* Watch Live → /live page */}
-            <a
-              href="/live"
-              onClick={handleWatchLive}
-              className="py-2 border-b border-gray-50 flex items-center gap-2 font-semibold text-red-600"
+            <Link
+              to="/launch"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2 border-b border-gray-50 flex items-center justify-between hover:text-[#1a2090] transition-colors font-semibold text-[#1a2090]"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+              <span>Preview</span>
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-[#eef3ff] text-[#1a2090] border border-[#dfe8ff]">
+                Launch
               </span>
-              Watch Live
-            </a>
+            </Link>
             {/* Give Online → /give page */}
             <Link
               to="/give"
